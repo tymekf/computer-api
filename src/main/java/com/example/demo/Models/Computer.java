@@ -1,7 +1,7 @@
 package com.example.demo.Models;
 
 import com.example.demo.NbpApi;
-import com.example.demo.TimeFormatAdapter;
+import com.example.demo.Xml.TimeFormatAdapter;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;

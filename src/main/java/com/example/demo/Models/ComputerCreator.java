@@ -1,13 +1,11 @@
-package com.example.demo;
+package com.example.demo.Models;
 
 import com.example.demo.Models.Computer;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerCreator {
-
 
     public List<Computer> createComputers() {
         List<Computer> computersList = new ArrayList<>();

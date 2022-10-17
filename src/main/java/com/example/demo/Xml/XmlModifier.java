@@ -1,8 +1,9 @@
-package com.example.demo;
+package com.example.demo.Xml;
 
+import com.example.demo.Models.ComputerCreator;
 import com.example.demo.Models.Computer;
+import com.example.demo.Models.Computers;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

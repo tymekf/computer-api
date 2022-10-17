@@ -30,7 +30,6 @@ public class NbpApi {
 
     public void fetchDataFromNbpApi(LocalDate purchaseDate) {
         HttpClient client = HttpClient.newHttpClient();
-//        HttpRequest request = HttpRequest.newBuilder(URI.create("http://api.nbp.pl/api/exchangerates/rates/c/usd/2022-01-03")).build();
         HttpRequest request = null;
         if (purchaseDate.equals(LocalDate.of(2022, 1, 3))) {
             request = HttpRequest.newBuilder(URI.create("http://api.nbp.pl/api/exchangerates/rates/c/usd/2022-01-03")).build();

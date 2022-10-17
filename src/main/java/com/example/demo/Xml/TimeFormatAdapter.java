@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Xml;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;
@@ -9,13 +9,12 @@ public class TimeFormatAdapter extends XmlAdapter <String, LocalDate> {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE;
 
     @Override
-    public LocalDate unmarshal(String v) throws Exception {
-        LocalDate parse = LocalDate.parse(v, dateTimeFormatter);
-        return parse;
+    public LocalDate unmarshal(String v) {
+        return LocalDate.parse(v, dateTimeFormatter);
     }
 
     @Override
-    public String marshal(LocalDate v) throws Exception {
+    public String marshal(LocalDate v) {
         return dateTimeFormatter.format(v);
     }
 }

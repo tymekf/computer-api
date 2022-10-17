@@ -1,55 +1,57 @@
 package com.example.demo;
 
+import com.example.demo.Database.DatabaseConnector;
+import com.example.demo.Database.DatabaseController;
+import com.example.demo.Xml.XmlModifier;
+
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Console {
 
     Scanner scanner = new Scanner(System.in);
     DatabaseConnector databaseConnector = new DatabaseConnector();
+    DatabaseController databaseController = new DatabaseController();
 
-    public  void printInitialMenu() {
-        System.out.println("\nWciśnij odpowiedni klawisz numeryczny:\n" +
-                "1. Wyświetl dane z bazy posortowane według odpowiedniej kolumny\n" +
-                "2. Wyszukaj w bazie danych po nazwie\n" +
-                "3. Wyszukaj w bazie danych po dacie\n" +
-                "4. Wyświetl plik XML");
-        int choice = scanner.nextInt();
+    private static final String initialMenu = "\nWciśnij odpowiedni klawisz numeryczny:\n" +
+            "1. Wyświetl dane z bazy posortowane według odpowiedniej kolumny\n" +
+            "2. Wyszukaj w bazie danych po nazwie\n" +
+            "3. Wyszukaj w bazie danych po dacie\n" +
+            "4. Wyświetl plik XML\n" +
+            "5. Zamknij program\n";
 
-        switch (choice) {
-            case 1:
-                sortTable();
-            case 2:
-                searchForAComputer();
-            case 3:
-                tinder();
-            case 4:
-                XmlModifier xmlModifier = new XmlModifier();
-                xmlModifier.generateXml();
-                backToInitialMenu();
-            default:
-                userDidSomethingWrong();
-        }
+    public Console() throws SQLException {
     }
 
-    private void userDidSomethingWrong() {
+    void printInitialMenu() {
+        System.out.println(initialMenu);
+        initialMenuChoice();
+    }
+
+    private void unfortunatelyUserDidSomethingWrong() {
         System.out.println("Proszę przeczytać dokładnie instrukcję");
+        emptyLine();
         printInitialMenu();
     }
 
-    private void tinder() {
+    private void emptyLine() {
         scanner.nextLine();
+    }
+
+    private void tinder() {
+        emptyLine();
         System.out.println("Wpisz datę:");
         String date = scanner.nextLine();
-        databaseConnector.searchDatabaseForDate(date);
-        backToInitialMenu();
+        databaseController.searchDatabaseForDate(date);
+        printInitialMenu();
     }
 
     private void searchForAComputer() {
-        scanner.nextLine();
+        emptyLine();
         System.out.println("Wpisz nazwę szukanego przez siebie komputera: ");
         String computerName = scanner.nextLine();
-        databaseConnector.searchDatabaseForComputerName(computerName);
-        backToInitialMenu();
+        databaseController.searchDatabaseForComputerName(computerName);
+        printInitialMenu();
     }
 
     private void sortTable() {
@@ -58,18 +60,44 @@ public class Console {
                 "2. data_ksiegowania\n" +
                 "3. koszt_USD\n" +
                 "4. koszt_PLN");
-        int columnNumber = scanner.nextInt();
-        if (columnNumber < 1 || columnNumber > 4) {
-            userDidSomethingWrong();
-        } else {
-            databaseConnector.printDatabaseSortedByColumnNumber(columnNumber);
+        String columnNumber = scanner.next();
+
+        switch (columnNumber) {
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+                databaseController.returnDatabaseSortedByColumnNumber(Integer.parseInt(columnNumber));
+                break;
+            default:
+                unfortunatelyUserDidSomethingWrong();
+                break;
         }
-        backToInitialMenu();
+        printInitialMenu();
     }
 
-    private void backToInitialMenu() {
-        System.out.println("\nWciśnij dowolny klawisz alfanumeryczny, żeby powrócić do poprzedniego menu");
-        scanner.next();
-        printInitialMenu();
+    void initialMenuChoice() {
+        String choice = scanner.next();
+        switch (choice) {
+            case "1":
+                sortTable();
+                break;
+            case "2":
+                searchForAComputer();
+                break;
+            case "3":
+                tinder();
+                break;
+            case "4":
+                XmlModifier xmlModifier = new XmlModifier();
+                xmlModifier.generateXml();
+                printInitialMenu();
+                break;
+            case "5":
+                System.exit(0);
+            default:
+                unfortunatelyUserDidSomethingWrong();
+                break;
+        }
     }
 }
