@@ -2,13 +2,11 @@ package com.example.demo;
 
 import com.example.demo.Database.DatabaseConnector;
 
-import java.sql.SQLException;
-
 public class Main {
 
-    public void start() throws SQLException {
+    public void start() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        databaseConnector.generateDataToBePutInDatabase();
+        databaseConnector.generate();
         Console console = new Console();
         console.printInitialMenu();
     }

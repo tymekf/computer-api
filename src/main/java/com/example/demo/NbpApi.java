@@ -2,14 +2,12 @@ package com.example.demo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 
-@RestController
 public class NbpApi {
 
     private static double dollarRateForThatDay;
@@ -18,15 +16,15 @@ public class NbpApi {
         return dollarRateForThatDay;
     }
 
-        public static double parseUsdRateFromJson(String responseBody) {
-            JSONObject usdPageFromThatDay = new JSONObject(responseBody);
-            JSONArray rates = usdPageFromThatDay.getJSONArray("rates");
-            for (int i = 0; i < rates.length(); i++) {
+    public static double parseUsdRateFromJson(String responseBody) {
+        JSONObject usdPageFromThatDay = new JSONObject(responseBody);
+        JSONArray rates = usdPageFromThatDay.getJSONArray("rates");
+        for (int i = 0; i < rates.length(); i++) {
                 JSONObject dollarRate = rates.getJSONObject(i);
                 dollarRateForThatDay = dollarRate.getDouble("ask");
-            }
-            return dollarRateForThatDay;
         }
+        return dollarRateForThatDay;
+    }
 
     public void fetchDataFromNbpApi(LocalDate purchaseDate) {
         HttpClient client = HttpClient.newHttpClient();

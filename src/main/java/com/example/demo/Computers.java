@@ -1,5 +1,6 @@
-package com.example.demo.Models;
+package com.example.demo;
 
+import com.example.demo.Models.Computer;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class Computers {
     }
 
     public Computers(Collection<Computer> computers) {
+        super();
         this.computers = computers;
     }
 

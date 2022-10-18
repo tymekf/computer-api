@@ -1,8 +1,8 @@
 package com.example.demo.Xml;
 
-import com.example.demo.Models.ComputerCreator;
+import com.example.demo.ComputerCreator;
 import com.example.demo.Models.Computer;
-import com.example.demo.Models.Computers;
+import com.example.demo.Computers;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

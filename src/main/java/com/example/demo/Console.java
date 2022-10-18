@@ -3,39 +3,27 @@ package com.example.demo;
 import com.example.demo.Database.DatabaseConnector;
 import com.example.demo.Database.DatabaseController;
 import com.example.demo.Xml.XmlModifier;
-
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Console {
 
     Scanner scanner = new Scanner(System.in);
-    DatabaseConnector databaseConnector = new DatabaseConnector();
     DatabaseController databaseController = new DatabaseController();
 
-    private static final String initialMenu = "\nWciśnij odpowiedni klawisz numeryczny:\n" +
-            "1. Wyświetl dane z bazy posortowane według odpowiedniej kolumny\n" +
-            "2. Wyszukaj w bazie danych po nazwie\n" +
-            "3. Wyszukaj w bazie danych po dacie\n" +
-            "4. Wyświetl plik XML\n" +
-            "5. Zamknij program\n";
-
-    public Console() throws SQLException {
-    }
-
-    void printInitialMenu() {
+    public void printInitialMenu() {
+        String initialMenu = "\nWciśnij odpowiedni klawisz numeryczny:\n" +
+                "1. Wyświetl dane z bazy posortowane według odpowiedniej kolumny\n" +
+                "2. Wyszukaj w bazie danych po nazwie\n" +
+                "3. Wyszukaj w bazie danych po dacie\n" +
+                "4. Wyświetl plik XML\n" +
+                "5. Zamknij program\n";
         System.out.println(initialMenu);
         initialMenuChoice();
     }
 
     private void unfortunatelyUserDidSomethingWrong() {
         System.out.println("Proszę przeczytać dokładnie instrukcję");
-        emptyLine();
         printInitialMenu();
-    }
-
-    private void emptyLine() {
-        scanner.nextLine();
     }
 
     private void tinder() {
@@ -76,28 +64,29 @@ public class Console {
         printInitialMenu();
     }
 
-    void initialMenuChoice() {
+    private void emptyLine() {
+        scanner.nextLine();
+    }
+
+    private void initialMenuChoice() {
         String choice = scanner.next();
+
         switch (choice) {
             case "1":
                 sortTable();
-                break;
             case "2":
                 searchForAComputer();
-                break;
             case "3":
                 tinder();
-                break;
             case "4":
                 XmlModifier xmlModifier = new XmlModifier();
                 xmlModifier.generateXml();
                 printInitialMenu();
-                break;
             case "5":
+                System.out.println("Do widzenia");
                 System.exit(0);
             default:
                 unfortunatelyUserDidSomethingWrong();
-                break;
         }
     }
 }

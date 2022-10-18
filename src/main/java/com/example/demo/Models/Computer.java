@@ -13,33 +13,38 @@ import java.time.LocalDate;
 @Table(name = "faktura")
 public class Computer {
 
+    public static final String name = "nazwa";
+    public static final String date = "data_ksiegowania";
+    public static final String plnPrice = "koszt_PLN";
+    public static final String usdPrice = "koszt_USD";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     private int id;
 
-    @Column(name = "nazwa")
-    @XmlElement(name = "nazwa")
-    private String name;
+    @Column(name = name)
+    @XmlElement(name = name)
+    private String computerName;
 
-    @Column(name = "data_ksiegowania")
-    @XmlElement(name = "data_ksiegowania")
+    @Column(name = date)
+    @XmlElement(name = date)
     @XmlJavaTypeAdapter(TimeFormatAdapter.class)
     private LocalDate postingDate;
 
-    @Column(name = "koszt_USD")
-    @XmlElement(name = "koszt_USD")
+    @Column(name = usdPrice)
+    @XmlElement(name = usdPrice)
     private double priceInUsd;
 
-    @Column(name = "koszt_PLN")
-    @XmlElement(name = "koszt_PLN")
+    @Column(name = plnPrice)
+    @XmlElement(name = plnPrice)
     private double priceInPln;
 
     public Computer() {
     }
 
     public Computer(String name, LocalDate postingDate, double priceInUsd) {
-        this.name = name;
+        this.computerName = name;
         this.postingDate = postingDate;
         this.priceInUsd = priceInUsd;
         setPriceInPln();
@@ -53,12 +58,12 @@ public class Computer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getComputerName() {
+        return computerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setComputerName(String computerName) {
+        this.computerName = computerName;
     }
 
     public LocalDate getPostingDate() {
@@ -89,7 +94,7 @@ public class Computer {
 
     @Override
     public String toString() {
-        return name + '\'' +
+        return computerName + '\'' +
                 ", purchase date: " + postingDate +
                 ", USD cost: " + priceInUsd +
                 ", PLN cost: " + priceInPln;

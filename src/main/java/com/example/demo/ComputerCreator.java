@@ -1,4 +1,4 @@
-package com.example.demo.Models;
+package com.example.demo;
 
 import com.example.demo.Models.Computer;
 import java.time.LocalDate;
@@ -14,5 +14,4 @@ public class ComputerCreator {
         computersList.add(new Computer("komputer 3", LocalDate.of(2022, 1, 3), 346));
         return computersList;
     }
-
 }
